@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Aryasruti Barik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base styles */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Raleway', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px; /* Base font size for rem units */
+        }
+
+        /* Mobile-first approach - base styles are for mobile */
+        .hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .parallax {
+            background-attachment: fixed; /* Disable parallax on mobile */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .parallax {
+                background-attachment: scroll; /* Better mobile performance */
+            }
+        }
+
+        #hero {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('mad.jpg');
+        }
+
+        .hero-content {
+         
+            text-align: center;
+            color: white;
+            padding: 1rem;
+            width: 100%;
+            max-width: 90vw;
+            backdrop-filter: blur(1px);
+        }
+
+        .hero-content h1 {
+            text-decoration: dotted;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 4.5rem); /* Responsive font size */
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+        }
+
+        .hero-content p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: clamp(0.5rem, 2vw, 1.25rem);
+            margin-top: 1.25rem;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            padding: 0 1rem;
+        }
+
+        .social-links a {
+            color: rgb(255, 255, 255);
+            font-size: clamp(0.875rem, 2vw, 1.5rem);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            border: 1px solid white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 25px;
+            min-width: 120px; /* Ensure buttons have minimum width */
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Sections */
+        section {
+            padding: clamp(2rem, 5vw, 5rem) 1rem;
+            background-color: #000000;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+            color: #ffffff;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+        }
+
+        /* About Section */
+        .about {
+            max-width: min(800px, 90%);
+            margin: 0 auto;
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            line-height: 1.8;
+        }
+
+        /* Projects Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(1rem, 3vw, 1.875rem);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .project-card {
+            border: 1px solid white;
+            background: #111111;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+        }
+.project-card:hover{
+    background-color: antiquewhite;
+    color: #000000;
+    transition-duration: 4s;
+}
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: clamp(1rem, 3vw, 1.25rem);
+        }
+
+        .project-info h3 {
+            font-size: clamp(1.125rem, 2.5vw, 1.4rem);
+            margin-bottom: 0.625rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: clamp(1rem, 2vw, 1.25rem);
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .skill-item {
+            border: 1px solid white;
+            text-align: center;
+            cursor: pointer;
+            padding: clamp(0.875rem, 2vw, 1.25rem);
+            background: #111111;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            font-size: clamp(0.875rem, 2vw, 1rem);
+        }
+        .skill-item:hover{
+            background-color: aquamarine;
+            color: black;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            border: 1px solid white;
+            max-width: min(600px, 90%);
+            margin: 0 auto;
+            box-shadow: 2px 3px 2px white;
+
+            padding: clamp(1.5rem, 4vw, 1.875rem);
+            background: #111111;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: clamp(1rem, 3vw, 1.25rem);
+        }
+
+        .form-group label {
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            border-radius: 50px;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: clamp(0.875rem, 2vw, 1rem);
+        }
+
+        button {
+            border-radius: 50px;
+            width: 100%; /* Full width on mobile */
+            max-width: 300px; /* Max width on larger screens */
+            padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 1.875rem);
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: clamp(1rem, 3vw, 1.25rem);
+            font-size: clamp(0.875rem, 2vw, 1rem);
+        }
+
+        /* Media Queries */
+        /* Tablet */
+        @media (min-width: 768px) {
+            .hero-content {
+                max-width: 80vw;
+            }
+
+            .social-links {
+                gap: 2rem;
+            }
+
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            button {
+                width: auto;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 1024px) {
+            .project-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .hero-content {
+                max-width: 70vw;
+            }
+
+            /* Enable hover effects only on desktop */
+            .project-card:hover {
+                transform: translateY(-10px);
+            }
+
+            .skill-item:hover {
+                transform: scale(1.05);
+            }
+
+            .social-links a:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1440px) {
+            html {
+                font-size: 18px; /* Slightly larger base font size for large screens */
+            }
+
+            .hero-content {
+                max-width: 60vw;
+            }
+        }
+
+        /* Ensure proper display on very small devices */
+        @media (max-width: 360px) {
+            html {
+                font-size: 14px;
+            }
+
+            .social-links a {
+                min-width: 100px;
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .parallax {
+                background-image: none !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .project-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<!-- The rest of the HTML remains the same as in the previous version -->
+<body>
+ 
+     <!-- Rest of the HTML remains the same as in your original code -->
+     <section id="hero" class="parallax">
+        <div class="hero-content">
+            <h1>Aryasruti Barik</h1>
+            <p>Digital Creator</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/aryasmrutibarik" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/aryasrutibarik" target="_blank">LinkedIn</a>
+                <a href="https://www.youtube.com/@apnapaathshaala" target="_blank">Youtube</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about hidden">
+        <h2 class="section-title">About Me</h2>
+        <p style="text-align: center;">
+            As an undergraduate in Electrical and Electronics Engineering, I am deeply passionate about the innovative possibilities within circuit design, chip design, and fabrication, with a strong focus on VLSI. My academic journey has provided me with a solid foundation in these areas, enabling me to tackle complex challenges and contribute to cutting-edge projects.
+        
+            Beyond my technical expertise, I have a keen interest in geopolitics, photography, and reading—pursuits that enrich my perspective and fuel my curiosity about the world. These interests not only broaden my knowledge but also enhance my problem-solving abilities and creativity.
+        
+            Entrepreneurship excites me, and I am driven to explore how technology and innovation can create impactful solutions. I am constantly seeking opportunities to combine my technical skills with entrepreneurial ventures, aiming to drive change and bring transformative ideas to life.
+        </p>
+        
+    </section>
+
+    <section id="projects" class="projects">
+        <h2 class="section-title hidden">Projects</h2>
+        <div class="project-grid">
+            <div class="project-card hidden">
+                <img src="IMG_3668.JPG" alt="Project 1" class="project-image">
+                <div class="project-info">
+                    <h3>E-commerce Platform</h3>
+                    <p>A full-stack e-commerce platform built with React and Node.js.</p>
+                </div>
+            </div>
+            <div class="project-card hidden">
+                <img src="IMG_3668.JPG" alt="Project 2" class="project-image">
+                <div class="project-info">
+                    <h3>Task Manager</h3>
+                    <p>A collaborative task management application with real-time updates.</p>
+                </div>
+            </div>
+            <div class="project-card hidden">
+                <img src="IMG_3668.JPG" alt="Project 3" class="project-image">
+                <div class="project-info">
+                    <h3>Weather Dashboard</h3>
+                    <p>A weather dashboard showing current conditions and forecasts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <h2 class="section-title hidden">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-item hidden">JavaScript</div>
+            <div class="skill-item hidden">React</div>
+            <div class="skill-item hidden">Node.js</div>
+            <div class="skill-item hidden">Python</div>
+            <div class="skill-item hidden">MongoDB</div>
+            <div class="skill-item hidden">AWS</div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title hidden">Contact Me</h2>
+        <form class="contact-form hidden" id="contactForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required placeholder="Enter your Name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="Enter your Email">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" required placeholder="Enter your Message"></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+        
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Aryasruti Barik. All rights reserved.</p>
+    </footer>
+    <script>
+        
+              
+        
+    document.getElementById("contactForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        try {
+            const response = await fetch("http://localhost:3000/submit-contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, email, message }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                
+                document.getElementById("contactForm").reset();
+            } else {
+                alert(result.error);
+            }
+        } catch (error) {
+            alert("An error occurred while sending your message to MR. Arya.");
+        }
+    });
+     // Detect mobile devices for parallax
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Parallax effect only on desktop
+        if (!isMobile) {
+            window.addEventListener('scroll', function() {
+                const parallax = document.querySelector('#hero');
+                let scrollPosition = window.pageYOffset;
+                parallax.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+            });
+        }
+
+        // Improved Intersection Observer with better thresholds
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
+
+        // Form submission with basic validation
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formElements = this.elements;
+            let isValid = true;
+
+            for (let element of formElements) {
+                if (element.required && !element.value.trim()) {
+                    isValid = false;
+                    element.style.borderColor = 'red';
+                } else {
+                    element.style.borderColor = '#333';
+                }
+            }
+
+            if (isValid) {
+                alert('Message sent successfully to Arya!');
+                this.reset();
+            }
+        });
+
+        // Handle resize events efficiently
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                // Update any necessary responsive elements
+                const hero = document.querySelector('#hero');
+                if (window.innerWidth <= 768) {
+                    hero.style.backgroundAttachment = 'scroll';
+                } else {
+                    hero.style.backgroundAttachment = 'fixed';
+                }
+            }, 250);
+        });
+    </script>
+</body>
+</html>
