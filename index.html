@@ -39,22 +39,23 @@
 
         /* Hero Section */
         .parallax {
-            background-attachment: fixed; /* Disable parallax on mobile */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
+    background-attachment: fixed; /* Default for desktops */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
 
-        @media (max-width: 768px) {
-            .parallax {
-                background-attachment: scroll; /* Better mobile performance */
-            }
-        }
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+    .parallax {
+        background-attachment: scroll; /* Disable parallax on touch devices */
+    }
+}
+
 
         #hero {
             background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('mad.jpg');
